@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+    <meta charset="utf-8">
+    <meta name="baidu-site-verification" content="vvVgSQUzPU">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content>
+     
+    <meta name="description" content>
+    <title>I am a coder </title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/style/style.css">
+  </head>
+  <body>
+    <div id="fixed-menu">
+      <span class="iconfont icon-arrowup"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="head">
+      
+      <a href="/" class>
+        首页
+      </a>
+      
+      <a href="/archives" class>
+        归档
+      </a>
+      
+      <a href="/about" class>
+        关于
+      </a>
+      
+    </div>
+    <div id="container">
+      <div id="main">
+        <div class="navbar">
+          <div class="toggle">
+            <span class="iconfont icon-menu toggle-icon"></span>
+          </div>
+          <div class="search">
+            <div class="input-warp">
+              <!-- <span class="iconfont icon-sousuo"></span> -->
+              <input type="text" name class="st-default-search-input" id="site-search" placeholder="Search Keys">
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <article class="post-entry">
+    <div class="header">
+      <div class="title">让代码优雅一点</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2019/09/01</span>
+        </span>
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/代码风格">代码风格</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/JS">JS</a>
+                  
+                
+            </span>
+          </span>
+         
+
+        
+          <span class="item leancloud-visitors" id="/2019/09/01/让代码优雅一点/" data-flag-title="让代码优雅一点">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+      </div>
+      <div>
+      </div>
+    </div>
+    <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>最近接手了公司一个老而大的项目，这个项目在去年的一年多时间里经过了多代长老的迭代更替。<br>厚重的历史包袱，凌乱不堪的代码风格，让我每次在为它改bug的时候，心情都异常沉重。 </p>
+<p>随手截几段代码</p>
+<p><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/01.jpg" alt="代码风格"><br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/02.jpg" alt="代码风格"><br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/06.jpg" alt="代码风格"><br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/03.jpg" alt="代码风格"></p>
+<p>bug一边改，一边吐槽，默默地开始担忧自己，<strong>感觉要成为背锅侠</strong>。<br><br><br><img src="/imgs/让代码优雅一点/05.jpg" alt="代码风格" style="width: 300px;"></p>
+<h1 id="会有什么问题"><a href="#会有什么问题" class="headerlink" title="会有什么问题"></a>会有什么问题</h1><p>其实上面截图的代码都还只是项目中的冰山一角，我们这篇文章讨论的主要是针对<strong>实现非常不优雅</strong>的代码。<br>那么这类代码通常会有哪些特征或者哪些问题呢？以下列举了几个点。</p>
+<ul>
+<li>不明所以（可读性差）</li>
+<li>牵一发而动全身</li>
+<li>重复冗余代码很多</li>
+<li>性能很差</li>
+<li>毫无封装可言</li>
+</ul>
+<p>当然最最重要的一点： <strong>容易出bug！！</strong></p>
+<h1 id="如何让代码更优雅"><a href="#如何让代码更优雅" class="headerlink" title="如何让代码更优雅"></a>如何让代码更优雅</h1><p>接下来我们将讨论如何让自己的代码更可维护，可读性更高，以及实现更加优雅。当然，下面的部分都来自我自己的一些总结，也都只是涵盖了一些关键点，如果有更好的姿势，欢迎补充。</p>
+<ul>
+<li><p><strong>关于变量</strong><br>变量的定义和使用方式在很多时候将直接影响一段代码的可维护性和可读性。</p>
+<ol>
+<li><p>多用<code>const</code><br>这个点其实是一个老生常谈的问题，相比于<code>let</code>，在可以使用<code>const</code>的场景下尽量使用<code>const</code>，带来的好处有</p>
+<ul>
+<li>可读性强，一眼就知道这个变量是否在后面的逻辑中会被修改</li>
+<li>有利于编译器优化<blockquote>
+<p>在函数式编程的编程范式中，本身会强调数据的不可变性，理论上，所有的变量定义都会使用<code>const</code>;</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>拒绝魔法数字<br>这是一个新手同学开发或者在偷懒追求快速的时候经常容易出现的问题。在上文的代码截图中举个🌰：<br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/03.jpg" alt="代码风格"><br>在这里的有两个方法使用了判断<code>row.status === 2</code> 和 <code>row.status === 3</code>，但是对于接手维护的同学来说，有两个很大的问题：</p>
+<ul>
+<li>完全不知道这里的<code>2</code>和<code>3</code>分别代表什么状态</li>
+<li>如果有一天这里的<code>status</code>值修改了，那么意味着所有类似这样判断的地方都需要修改，很容易出问题</li>
+</ul>
+<p>这里比较推荐的方式是使用常量定义状态</p>
+<img src="/imgs/让代码优雅一点/07.jpg" alt="代码风格" style="width: 400px;">
+然后在判断的地方去使用
+
+<p><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/08.jpg" alt="代码风格"></p>
+</li>
+<li><p>善用解构和展开运算符<br><code>es6</code>的解构和展开运算符，可以帮我们很好的定义变量，取别名，给予默认值，收敛数据等等，具体使用姿势可以看阮一峰的<code>es6</code><a href="https://es6.ruanyifeng.com/?search=展开&x=0&y=0#docs/destructuring" target="_blank" rel="noopener">解构赋值</a>和<a href="https://es6.ruanyifeng.com/?search=%E5%B1%95%E5%BC%80&x=0&y=0#docs/object" target="_blank" rel="noopener">展开运算符</a>，这里不再展开</p>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p><strong>关于<code>if else</code></strong><br><code>if else</code>的书写方式直接会影响程序流程控制，如何组织更优雅的条件判断也是代码优雅性的关键。</p>
+<ol>
+<li><p><code>if return</code>  or  <code>if  else</code><br>这两种流程控制的风格从远古至今一直都是讨论的话题。个人更加推荐<code>if retrun</code>,它会让你的流程控制逻辑变得非常清晰干净，举个🌰：<br>这是使用<code>if else</code>的一段代码<br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/09.jpg" alt="代码风格"><br>我们下面使用<code>if return</code>改写一下<br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/10.jpg" alt="代码风格"><br>可以很明显的看出来差别。</p>
+</li>
+<li><p>使用映射<br><strong>强烈推荐！</strong>这是一个非常非常好用的方式来优化<code>swtich case</code>以及不同状态码之间的差异逻辑。日常举🌰：<br>这是一个用<code>swtich case</code>的代码<br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/11.jpg" alt="代码风格"><br>用映射优化之后<br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/12.jpg" alt="代码风格"><br>优化之后的代码无论从可维护性和代码简洁性来说，都有着出色的优势。</p>
+</li>
+<li><p>善用但不滥用三元表达式和短路运算符<br>我在之前的那个老项目里经常看到这样的代码</p>
+<img src="/imgs/让代码优雅一点/13.jpg" alt="代码风格" style="width: 400px;">
+我们使用三元运算符优化一下
+<img src="/imgs/让代码优雅一点/14.jpg" alt="代码风格" style="width: 400px;">
+
+<p>但是切记，<strong>千万不要滥用三元表达式</strong>，比如以下代码<br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/15.jpg" alt="代码风格"><br>会导致可读性非常差。</p>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p><strong>关于数据和类型</strong><br>对于数据的处理，以及数据类型的判断，<code>lodash</code> 和<code>es6</code>提供了很多具有优秀<strong>健壮性</strong>并且优雅的处理方式。</p>
+<ol>
+<li><p>善用隐式转换来明确数据类型<br>我们在做值的判断时，一定要自己明确变量所应该具有的数据类型，而不要依赖接口或原始数据的类型，这样非常不明确而且不靠谱。<br>举个🌰，下面的这个代码是一个判断</p>
+<img src="/imgs/让代码优雅一点/16.jpg" alt="代码风格" style="width: 400px;">
+
+<p>这里的<code>code</code>其实期望是一个数字，但是数据返回也许没有做处理，返回了字符串<code>&#39;0&#39;</code>，所以之前开发的通讯稿使用了这种判断。<br>但这里的问题是:  </p>
+<ul>
+<li>类型语义不明确，我们应当从这个值本身的含义出发，它代表的就应该是一个数字<code>0</code></li>
+<li>如果这个对应的后端同学哪天突然开窍了，把<code>code</code>改成了正确的<code>int</code>类型导致了bug，那将是一个需要撕逼的问题。</li>
+</ul>
+<p>我们可以稍微修改一下</p>
+<img src="/imgs/让代码优雅一点/17.jpg" alt="代码风格" style="width: 400px;">
+是不是舒服多了?
+</li>
+<li><p><code>lodash</code><br>不得不吹一下<code>lodash</code>，这个库封装了太多精辟和高性能的方法，配合<code>babel-plugin-import</code>可以按需所取，谁用谁知道。<br>个人比较常用的方法有<code>get</code>,<code>pick</code>,<code>omit</code>以及一些现有的判断方法和数据处理方法。详细的可以去<a href="https://www.lodashjs.com/docs/latest" target="_blank" rel="noopener"><code>lodash</code>官网</a>逛逛，总能找到一些意外的收获！</p>
+</li>
+<li><p>默认值<br>默认值的赋予是一个非常重要的事，它能帮我们避免很多不必要的<code>js</code>报错，可以极大的提高代码整体的健壮性。<br>举个🌰：<br>下面的<code>formItemOptions</code>没有任何默认值处理，如果返回了<code>undefined</code>, 这里会直接报错。<br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/18.jpg" alt="代码风格"></p>
+<p>稍微优化一下，给予默认值<br><img src="/imgs/%E8%AE%A9%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E4%B8%80%E7%82%B9/19.jpg" alt="代码风格"><br>这样就可以避免一些非常不必要的报错了。</p>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><strong>关于循环</strong><br><code>es5</code>和<code>es6</code>中，新增了很多数组的方法，可以帮助我们很简洁的实现一些循环逻辑。<blockquote>
+<p>待补充：这里我们通过一段代码的优化来做一些比较，但不讨论孰优孰劣</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我们上面通过对几个常见场景的代码做一些分析，可以将原来的代码问题做一些优化。篇幅有限，只提取了几种优化的姿势。</p>
+<blockquote>
+<p>后面抽时间会陆续再进行补充，尤其是在有一些场景下，我们可以借助函数式编程的一些思想，做更进一步的优化。</p>
+</blockquote>
+<p>祝大家能写出更加优雅的代码🚀🚀🚀！！</p>
+
+
+  
+
+  
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+    </div>
+    <div class="item right">
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://jiangkangkang.space">康康</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://jiangkangkang.space/2019/09/01/让代码优雅一点/">http://jiangkangkang.space/2019/09/01/让代码优雅一点/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://jiangkangkang.space">康康</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+</article>
+        </div>
+        <!-- <footer>
+          <div class="copyright">
+            ©2019 <a href="http://jiangkangkang.space">康康</a>. Powered by Hexo &
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu">hexo-theme-huhu</a>
+          </div>
+          
+        </footer> -->
+      </div>
+      <div id="card-wrap">
+        <div class="card">
+          <div class="logo-widget">
+            <div class="author">
+              康康
+            </div>
+            <div class="logo" style="background-image: url('/images/logo.png')"></div>
+          </div>
+          
+          <div class="follow-widget">
+            
+            <a href="https://github.com/shixiaohu2206" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+           
+          <div class="toc-widget">
+            <div class="title">
+              <span>Toc</span>
+            </div>
+            <div class="post-toc">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#起因"><span class="toc-text">起因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#会有什么问题"><span class="toc-text">会有什么问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何让代码更优雅"><span class="toc-text">如何让代码更优雅</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+            </div>
+          </div>
+           
+          <div class="category-widget">
+            <div class="title">
+              <span>分类</span>
+              <span><a href="/archives">···</a></span>
+            </div>
+            <div class="list">
+               
+              <a href="/categories/代码风格/">
+                代码风格
+              </a>
+               
+            </div>
+          </div>
+          <div class="tag-widget">
+            <div class="title">
+              <span>标签</span>
+              <span><a href>···</a></span>
+            </div>
+            <div class="tag-cloud">
+              <a href="/tags/JS/" style="font-size: 13px; color: #4a4a4a">JS</a>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <!-- swiftype -->
+    
+    <!-- swiftype -->
+  </body>
+  
+</html>
+<script type="text/javascript">
+  window.addEventListener('load', function() {
+    ;(adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: '',
+      enable_page_level_ads: true
+    })
+
+    window.THEME_CONFIG = JSON.parse('{"title":"I am a coder","subtitle":null,"description":null,"author":"康康","language":"zh-CN","timezone":null,"url":"http://jiangkangkang.space","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"utone","deploy":[{"type":"git","repo":"git@github.com:jiangkk/jiangkk.github.io.git"},{"type":"heroku","repo":"jiangkangkang.space"}],"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"menu":{"home":"/","archives":"/archives","about":"/about"},"logo":"/images/logo.png","categories_max":5,"tags_max":10,"favicon":"/images/favicon.ico","site_search":true,"rss":"/atom.xml","follow":{"github":"https://github.com/shixiaohu2206"},"search_url":"/search.xml","site_icp":"","site_friends":{"房间里的小猫咪":"http://baidu.com"},"share":["weibo","weixin","qqkongjian","QQ","douban","facebook","twitter","google"],"cdn_module":{"av_min":"https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min","pjax":"https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min","jquery":"https://cdn.bootcss.com/jquery/3.4.1/jquery.min","confirm":"https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min","fancybox":"https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"},"baidu_push":true,"reward":null}')
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {
+      require.config({
+        paths: {
+          // site
+          share: 'share',
+          search: 'search',
+          iconfont: 'iconfont',
+          util: 'util',
+          valine: ['cdn/Valine.min'],
+
+          // cdn
+          av: ['https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min', 'cdn/av-min'],
+          pjax: ['https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min', 'cdn/pjax.min'],
+          jquery: ['https://cdn.bootcss.com/jquery/3.4.1/jquery.min', 'cdn/jquery.min'],
+          confirm: ['https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min', 'cdn/jquery.confirm.min'],
+          fancybox: ['https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min', 'cdn/jquery.fancybox.min']
+        },
+
+        map: {
+          '*': {
+            css: 'https://cdn.bootcss.com/require-css/0.1.10/css.min.js'
+          }
+        },
+
+        shim: {
+          fancybox: {
+            deps: ['css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css']
+          },
+          confirm: {
+            deps: ['css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css']
+          }
+        },
+
+        // 加载超时
+        waitSeconds: 3
+      })
+    })
+  })
+</script>
+
+<script>
+  ;(function() {
+    var bp = document.createElement('script')
+    var curProtocol = window.location.protocol.split(':')[0]
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+    }
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(bp, s)
+  })()
+</script>
+
